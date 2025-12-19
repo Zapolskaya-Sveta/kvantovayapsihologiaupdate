@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный Кабинет | J.O.Y.</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="joy.css">
+</head>
+<body class="cabinet-body">
+
+<div class="cabinet-container">
+    <aside class="sidebar">
+        <!-- Логотип -->
+        <div class="sidebar-header">
+            <a href="index.html" class="logo-link"><img src="img/Frame.svg" alt="J.O.Y." style="height: 30px;"></a>
+        </div>
+        
+        <div class="user-card">
+            <div class="avatar-circle"><i class="fas fa-user"></i></div>
+            <h5 id="userNameDisplay">...</h5>
+            <span id="userRoleDisplay" class="badge-role">...</span>
+        </div>
+
+        <nav class="cabinet-nav">
+            <!-- Меню АДМИНА -->
+            <div id="adminLinks" style="display: none;">
+                <p class="nav-title">АДМИНИСТРАТОР</p>
+                <a href="#" class="nav-item active" onclick="showTab('admin-appointments')">
+                    <i class="fas fa-calendar-check"></i> Заявки
+                </a>
+                <a href="#" class="nav-item" onclick="showTab('admin-products')">
+                    <i class="fas fa-box"></i> Товары
+                </a>
+                <a href="#" class="nav-item" onclick="showTab('admin-users')">
+                    <i class="fas fa-users"></i> Пользователи
+                </a>
+            </div>
+
+            <!-- Меню КЛИЕНТА -->
+            <div id="userLinks" style="display: none;">
+                <p class="nav-title">МОЙ КАБИНЕТ</p>
+                <a href="#" class="nav-item active" onclick="showTab('profile')">
+                    <i class="far fa-id-card"></i> Профиль
+                </a>
+                <a href="#" class="nav-item" onclick="showTab('sessions')">
+                    <i class="far fa-calendar-check"></i> Мои записи
+                </a>
+                <a href="#" class="nav-item" onclick="showTab('cart')">
+                    <i class="fas fa-shopping-basket"></i> Корзина
+                </a>
+            </div>
+
+            <div class="nav-bottom">
+                <a href="index.html" class="nav-item"><i class="fas fa-home"></i> На главную</a>
+                <a href="#" class="nav-item text-danger" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Выход</a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="content-area">
+        
+        <!-- АДМИН: Заявки -->
+        <div id="tab-admin-appointments" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Заявки клиентов</h2>
+            <div class="card-panel" id="adminAppointList"></div>
+        </div>
+
+        <!-- АДМИН: Товары -->
+        <div id="tab-admin-products" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Управление товарами</h2>
+            <div class="card-panel">
+                <form id="productForm" onsubmit="addProduct(event)" class="mb-4 p-3 border rounded">
+                    <div class="form-group">
+                        <label>Название</label>
+                        <input type="text" id="prodTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Цена (руб)</label>
+                        <input type="number" id="prodPrice" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Описание</label>
+                        <textarea id="prodDesc" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-success btn-sm">Добавить товар</button>
+                </form>
+                <ul id="adminProductList" class="list-group"></ul>
+            </div>
+        </div>
+
+        <!-- АДМИН: Пользователи (РАСШИРЕННАЯ ТАБЛИЦА) -->
+        <div id="tab-admin-users" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Зарегистрированные пользователи</h2>
+            <div class="card-panel">
+                <table class="admin-table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Email</th>
+                            <th>Дата рожд.</th>
+                            <th>Место</th>
+                            <th>Хобби</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminUsersList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- КЛИЕНТ: Профиль (Cookie + DB) -->
+        <div id="tab-profile" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Профиль</h2>
+            <div class="card-panel">
+                <form onsubmit="saveToCookies(event)">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>ФИО</label>
+                            <input type="text" id="cName" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Email</label>
+                            <input type="email" id="cEmail" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Дата рождения</label>
+                            <input type="date" id="cDob" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Место рождения</label>
+                            <input type="text" id="cPlace" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Увлечения</label>
+                        <textarea id="cHobby" class="form-control"></textarea>
+                    </div>
+                    
+                    <button class="main-button small-btn">Сохранить изменения</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger ml-2" onclick="clearCookies()">Очистить Cookie</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- КЛИЕНТ: Записи -->
+        <div id="tab-sessions" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Мои записи</h2>
+            <div class="card-panel" id="userAppointList"></div>
+        </div>
+
+        <!-- КЛИЕНТ: Корзина -->
+        <div id="tab-cart" class="content-tab" style="display: none;">
+            <h2 class="tab-title">Корзина</h2>
+            <div class="card-panel">
+                <div id="cartItemsContainer"></div>
+                <div class="mt-3 text-right">
+                    <h4>Итого: <span id="cartTotal">0</span> руб.</h4>
+                    <button class="main-button small-btn">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+<script src="joy.js"></script>
+</body>
+</html>

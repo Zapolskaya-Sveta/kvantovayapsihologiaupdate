@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "title": "Медитация 'Денежный Поток'",
+        "description": "Раскрытие финансового потенциала и снятие блоков.",
+        "price": 1500,
+        "image": "img/Frame(4).png",
+        "category": "meditation"
+    },
+    {
+        "id": 2,
+        "title": "Медитация 'Исполнение Желаний'",
+        "description": "Техника материализации мыслей и целей.",
+        "price": 1500,
+        "image": "img/Frame (6).png",
+        "category": "meditation"
+    },
+    {
+        "id": 3,
+        "title": "Курс 'Сила Рода'",
+        "description": "Глубинная проработка родовых сценариев. 4 недели.",
+        "price": 12000,
+        "image": "img/Group 194.png",
+        "category": "course"
+    },
+    {
+        "id": 4,
+        "title": "Медитация 'Здоровое Сердце'",
+        "description": "Исцеление обид и открытие сердечной чакры.",
+        "price": 990,
+        "image": "img/Frame.png",
+        "category": "meditation"
+    },
+    {
+        "id": 5,
+        "title": "Личная консультация (Online)",
+        "description": "Разбор вашей ситуации по видеосвязи. 60 мин.",
+        "price": 5000,
+        "image": "img/session.png",
+        "category": "consultation"
+    },
+    {
+        "id": 6,
+        "title": "Курс 'Женская Энергия'",
+        "description": "Возвращение к своей природе и ресурсному состоянию.",
+        "price": 8500,
+        "image": "img/Frame(1).png",
+        "category": "course"
+    },
+    {
+        "id": 7,
+        "title": "Медитация 'Антистресс'",
+        "description": "Быстрое снятие напряжения после рабочего дня.",
+        "price": 700,
+        "image": "img/Frame(2).png",
+        "category": "meditation"
+    },
+    {
+        "id": 8,
+        "title": "Доступ в Закрытый Клуб (1 мес)",
+        "description": "Еженедельные эфиры, разборы и окружение.",
+        "price": 3000,
+        "image": "img/club.png",
+        "category": "club"
+    },
+    {
+        "id": 9,
+        "title": "Медитация 'Утренняя Настройка'",
+        "description": "Заряд бодрости и позитива на весь день.",
+        "price": 500,
+        "image": "img/Frame(3).png",
+        "category": "meditation"
+    },
+    {
+        "id": 10,
+        "title": "Пакет 'Перерождение'",
+        "description": "Комплекс из 5 медитаций и чек-листов.",
+        "price": 4500,
+        "image": "img/Frame(5).png",
+        "category": "course"
+    }
+]
